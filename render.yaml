@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: lfg-viewer
+    env: python
+    plan: free
+    buildCommand: ""
+    startCommand: python flask_lfg_viewer.py
