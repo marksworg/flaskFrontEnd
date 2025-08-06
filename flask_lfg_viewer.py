@@ -2,7 +2,8 @@ from flask import Flask, render_template, request
 from supabase import create_client
 import os
 from dotenv import load_dotenv
-from datetime import datetime
+from datetime import datetime, timezone
+import humanize
 
 # --- LOAD ENV ---
 load_dotenv()
@@ -30,7 +31,8 @@ def index():
 
     for post in results:
         post['days'] = [d.capitalize() for d in days if post.get(d) == 1]
-        post['created'] = datetime.utcfromtimestamp(post['created_utc']).strftime('%Y-%m-%d %H:%M UTC')
+        dt = datetime.fromtimestamp(post['created_utc'], tz=timezone.utc)
+        post['created'] = humanize.naturaltime(datetime.now(timezone.utc) - dt)
 
     return render_template("index.html", systems=systems, days=days,
                            selected_system=selected_system,
