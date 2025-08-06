@@ -21,7 +21,7 @@ def index():
     selected_system = request.args.get('system', 'Any')
     selected_days = request.args.getlist('day')
 
-    query = supabase.table("posts").select("*")
+    query = supabase.table("posts").select("*").order("created_utc", desc=True)
     if selected_system != "Any":
         query = query.eq("system", selected_system)
     for day in selected_days:
