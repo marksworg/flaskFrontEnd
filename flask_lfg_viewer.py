@@ -15,7 +15,11 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def index():
-    systems = ["Any", "5E", "PF2E", "PATHFINDER", "CALL OF CTHULHU", "VTM"]
+    # Get distinct systems from the posts table via RPC
+    systems_response = supabase.rpc("distinct_systems").execute()
+    systems_data = systems_response.data if systems_response.data else []
+    systems = ["Any"] + sorted(systems_data)
+
     days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
 
     selected_system = request.args.get('system', 'Any')
