@@ -30,6 +30,7 @@ def index():
         "MIST ENGINE",
         "PATHFINDER",
         "PF2E",
+        "SAVAGE WORLDS",
         "SHADOWDARK",
         "STARFINDER",
         "VTM"
