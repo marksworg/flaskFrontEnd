@@ -15,10 +15,25 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def index():
-    # Get distinct systems from the posts table via RPC
-    systems_response = supabase.rpc("distinct_systems").execute()
-    systems_data = systems_response.data if systems_response.data else []
-    systems = ["Any"] + sorted(systems_data)
+    # Hard-coded list of supported systems
+    systems = [
+        "Any",
+        "5E",
+        "PF2E",
+        "PATHFINDER",
+        "DRAW STEEL",
+        "LANCER",
+        "STARFINDER",
+        "DAGGERHEART",
+        "CALL OF CTHULHU",
+        "VTM",
+        "SHADOWDARK",
+        "BIOPUNK",
+        "AVATAR LEGENDS",
+        "FABULA ULTIMA",
+        "CYBERPUNK",
+        "MIST ENGINE"
+    ]
 
     days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
 
