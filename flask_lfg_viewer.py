@@ -18,21 +18,21 @@ def index():
     # Hard-coded list of supported systems
     systems = [
         "Any",
-        "5E",
-        "PF2E",
-        "PATHFINDER",
-        "DRAW STEEL",
-        "LANCER",
-        "STARFINDER",
-        "DAGGERHEART",
-        "CALL OF CTHULHU",
-        "VTM",
-        "SHADOWDARK",
-        "BIOPUNK",
         "AVATAR LEGENDS",
-        "FABULA ULTIMA",
+        "5E",
+        "BIOPUNK",
+        "CALL OF CTHULHU",
         "CYBERPUNK",
-        "MIST ENGINE"
+        "DAGGERHEART",
+        "DRAW STEEL",
+        "FABULA ULTIMA",
+        "LANCER",
+        "MIST ENGINE",
+        "PATHFINDER",
+        "PF2E",
+        "SHADOWDARK",
+        "STARFINDER",
+        "VTM"
     ]
 
     days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
