@@ -41,11 +41,22 @@ def index():
     selected_system = request.args.get('system', 'Any')
     selected_days = request.args.getlist('day')
 
-    query = supabase.table("posts").select("*").order("created_utc", desc=True)
+    # Most recent first, then limit to 1,000 rows
+    query = (
+        supabase
+        .table("posts")
+        .select("*")
+        .order("created_utc", desc=True)
+    )
+
     if selected_system != "Any":
         query = query.eq("system", selected_system)
+
     for day in selected_days:
         query = query.eq(day, 1)
+
+    # Apply the limit last so it limits the filtered, ordered set
+    query = query.limit(1000)  # or: .range(0, 999)
 
     results = query.execute().data
 
@@ -54,10 +65,14 @@ def index():
         dt = datetime.fromtimestamp(post['created_utc'], tz=timezone.utc)
         post['created'] = humanize.naturaltime(datetime.now(timezone.utc) - dt)
 
-    return render_template("index.html", systems=systems, days=days,
-                           selected_system=selected_system,
-                           selected_days=selected_days,
-                           results=results)
+    return render_template(
+        "index.html",
+        systems=systems,
+        days=days,
+        selected_system=selected_system,
+        selected_days=selected_days,
+        results=results
+    )
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
